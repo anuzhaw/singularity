@@ -4,7 +4,6 @@ From: pytorch/pytorch:1.3-cuda10.1-cudnn7-runtime
 %post
 
     apt-get update
+    apt-get install -y libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg libav-tools 
+        libavcodec-extra
     apt-get install -y libsndfile1
-    apt-get install -y ffmpeg
-    
-    pip install audioread audiomate
