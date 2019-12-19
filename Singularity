@@ -10,7 +10,7 @@ From: pytorch/pytorch:1.3-cuda10.1-cudnn7-runtime
     echo $PATH
     ls /opt/conda/bin/
     
-    export PATH = /opt/conda/bin:$PATH
+    echo 'export PATH=/opt/conda/bin:$PATH' >>$SINGULARITY_ENVIRONMENT
 
     conda install -c anaconda pip 
     
