@@ -1,7 +1,7 @@
 Bootstrap: docker
 From: pytorch/pytorch
 %files
-requirements.txt /workspace/requirements.txt
+requirements-real-time-voice-cloning.txt /workspace/requirements.txt
 %post
 
 cd "/workspace"
