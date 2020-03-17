@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: pytorch/pytorch
+%files
+requirements-real-time-voice-cloning.txt /workspace/requirements.txt
+%post
+
+cd "/workspace"
+apt-get clean \
+&& apt-get update \
+&& apt-get install -y ffmpeg libportaudio2 openssh-server python3-pyqt5 xauth \
+&& apt-get -y autoremove \
+&& mkdir /var/run/sshd \
+&& mkdir /root/.ssh \
+&& chmod 700 /root/.ssh \
+&& ssh-keygen -A \
+&& sed -i "s/^.*PasswordAuthentication.*$/PasswordAuthentication no/" /etc/ssh/sshd_config \
+&& sed -i "s/^.*X11Forwarding.*$/X11Forwarding yes/" /etc/ssh/sshd_config \
+&& sed -i "s/^.*X11UseLocalhost.*$/X11UseLocalhost no/" /etc/ssh/sshd_config \
+&& grep "^X11UseLocalhost" /etc/ssh/sshd_config || echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
+echo "tensorflow-gpu>=1.10.0,<=1.14.0\numap-learn\nvisdom\nwebrtcvad\nlibrosa>=0.5.1\nmatplotlib>=2.0.2\nnumpy>=1.14.0\nscipy>=1.0.0\ntqdm\nsounddevice\nUnidecode\ninflect\nPyQt5\nmultiprocess\nnumba" >> /workspace/requirements.txt
+/opt/conda/bin/conda install --file /workspace/requirements.txt
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8ueGc1GaRSw5RVH+p1IZvqlHzTHBhTgD+ktlk2tUakhb217ZSwSgvSKb3PM2IfEfsrIKmq5nc85iMFW0aVU3IDwPyqwQPeFTMizVn0Y4ulHxhra2ic3SJFn+9pLkIaa4Qjl9DTW3MRWaJ03FYpfW7hKh0JPDV5zc+a8fBKxmuNEsGi+GmoIm+KzM+PWTwroVKFfdjYT6mS2vaYGF73cPBuYr4FEcupje4uRGjuquCbDEzoiiBmcGYLm/14lTre6zRPZYDL6o/fK57vDELOVK7zbc/5USEvdVkI85xQ84wViFq/A6qYYbE74ifnT63J5SIgt5oE809ahcL/c+WlMKd anum@gpulogin" \
+>> /root/.ssh/authorized_keys
+echo "export PATH=/opt/conda/bin:$PATH" >> /root/.profile
+%runscript
+cd "/workspace"
+exec sh -c /usr/sbin/sshd && bash bash "$@"
+%startscript
+cd "/workspace"
+exec sh -c /usr/sbin/sshd && bash bash "$@"
