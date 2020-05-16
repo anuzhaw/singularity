@@ -1,2 +1,4 @@
 Bootstrap: docker
 From: quay.io/mpuels/docker-py-kaldi-asr:0.4.1
+
+pip install py-nltools
