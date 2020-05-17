@@ -17,7 +17,7 @@ apt-get clean \
 && sed -i "s/^.*X11Forwarding.*$/X11Forwarding yes/" /etc/ssh/sshd_config \
 && sed -i "s/^.*X11UseLocalhost.*$/X11UseLocalhost no/" /etc/ssh/sshd_config \
 && grep "^X11UseLocalhost" /etc/ssh/sshd_config || echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
-echo "tensorflow-gpu>=1.10.0,<=1.14.0\numap-learn\nvisdom\nwebrtcvad\nlibrosa>=0.5.1\nmatplotlib>=2.0.2\nnumpy>=1.14.0\nscipy>=1.0.0\ntqdm\nsounddevice\nUnidecode\ninflect\nPyQt5\nmultiprocess\nnumba" >> /workspace/requirements.txt
+echo "tensorflow-gpu>=1.10.0,<=1.14.0\numap-learn\nvisdom\nwebrtcvad\nlibrosa>=0.5.1\nmatplotlib>=2.0.2\nnumpy>=1.14.0\nscipy>=1.0.0\ntqdm\nsounddevice\nUnidecode\ninflect\nmultiprocess\nnumba" >> /workspace/requirements.txt
 /opt/conda/bin/pip install -r /workspace/requirements.txt
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8ueGc1GaRSw5RVH+p1IZvqlHzTHBhTgD+ktlk2tUakhb217ZSwSgvSKb3PM2IfEfsrIKmq5nc85iMFW0aVU3IDwPyqwQPeFTMizVn0Y4ulHxhra2ic3SJFn+9pLkIaa4Qjl9DTW3MRWaJ03FYpfW7hKh0JPDV5zc+a8fBKxmuNEsGi+GmoIm+KzM+PWTwroVKFfdjYT6mS2vaYGF73cPBuYr4FEcupje4uRGjuquCbDEzoiiBmcGYLm/14lTre6zRPZYDL6o/fK57vDELOVK7zbc/5USEvdVkI85xQ84wViFq/A6qYYbE74ifnT63J5SIgt5oE809ahcL/c+WlMKd anum@gpulogin" \
 >> /root/.ssh/authorized_keys
