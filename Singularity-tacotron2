@@ -1,5 +1,6 @@
 Bootstrap: docker
 From: pytorch/pytorch:1.0-cuda10.0-cudnn7-runtime
+
 %files
 requirements-real-time-voice-cloning.txt /workspace/requirements.txt
 %post
